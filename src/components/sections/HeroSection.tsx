@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ArrowDown, Sparkles, Code, Rocket, Briefcase, Globe, Star } from 'lucide-react';
@@ -14,6 +14,35 @@ const floatingElements = [
     { icon: Sparkles, delay: 1, x: '5%', y: '65%', size: 'text-teal-400' },
     { icon: Code, delay: 1.5, x: '90%', y: '75%', size: 'text-pink-400' },
 ];
+
+// Typewriter Component
+function TypewriterText({ text }: { text: string }) {
+    const [displayText, setDisplayText] = React.useState('');
+    const [currentIndex, setCurrentIndex] = React.useState(0);
+
+    React.useEffect(() => {
+        if (currentIndex < text.length) {
+            const timeout = setTimeout(() => {
+                setDisplayText(prev => prev + text[currentIndex]);
+                setCurrentIndex(prev => prev + 1);
+            }, 100); // Adjust speed here (lower = faster)
+
+            return () => clearTimeout(timeout);
+        }
+    }, [currentIndex, text]);
+
+    return (
+        <span className="relative inline-flex">
+            {displayText}
+            <motion.span
+                animate={{ opacity: [1, 0, 1] }}
+                transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
+                className="inline-block w-0.5 h-[1em] bg-primary ml-1 -mb-1"
+                style={{ display: currentIndex >= text.length ? 'none' : 'inline-block' }}
+            />
+        </span>
+    );
+}
 
 export function HeroSection() {
     const containerRef = useRef<HTMLElement>(null);
@@ -187,15 +216,15 @@ export function HeroSection() {
                             </span>
                         </h1>
 
-                        <motion.p
+                        <motion.div
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ delay: 0.6 }}
                             className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground/90 mb-6 flex items-center justify-center lg:justify-start gap-4"
                         >
-                            Full-Stack Web Developer
+                            <TypewriterText text="Full-Stack Web Developer" />
                             <span className="hidden md:inline h-px w-12 bg-primary/50"></span>
-                        </motion.p>
+                        </motion.div>
 
                         <motion.p
                             initial={{ y: 20, opacity: 0 }}

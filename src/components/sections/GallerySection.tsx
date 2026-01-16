@@ -25,7 +25,7 @@ export function GallerySection() {
                         Visuals
                     </span>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
-                        Project <span className="gradient-text">Gallery</span>
+                        Image <span className="gradient-text">Gallery</span>
                     </h2>
                     <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
                         A visual exploration of my recent work and design experiments.

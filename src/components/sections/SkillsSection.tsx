@@ -84,15 +84,21 @@ function SkillCard({ name, level, accent, size, index, isInView, icon: Icon }: S
     };
 
     const iconSizes = {
-        sm: 'text-4xl',
-        md: 'text-5xl',
-        lg: 'text-6xl',
+        sm: 'text-3xl sm:text-4xl',
+        md: 'text-4xl sm:text-5xl',
+        lg: 'text-5xl sm:text-6xl',
     };
 
     const cardPadding = {
         sm: 'p-4',
-        md: 'p-6',
-        lg: 'p-8',
+        md: 'p-5 sm:p-6',
+        lg: 'p-5 sm:p-8',
+    };
+
+    const nameSizes = {
+        sm: 'text-lg',
+        md: 'text-xl sm:text-2xl',
+        lg: 'text-2xl sm:text-3xl', // 2rem ≈ 3xl
     };
 
     return (
@@ -123,7 +129,7 @@ function SkillCard({ name, level, accent, size, index, isInView, icon: Icon }: S
         >
             {/* Main Card */}
             <div
-                className={`relative h-full rounded-3xl backdrop-blur-2xl overflow-hidden transition-all duration-500 ${cardPadding[size]}`}
+                className={`relative h-full rounded-2xl sm:rounded-3xl backdrop-blur-2xl overflow-hidden transition-all duration-500 ${cardPadding[size]}`}
                 style={{
                     backgroundColor: `color-mix(in oklch, ${accent} 8%, rgba(10, 10, 15, 0.6))`,
                     border: `2px solid ${isHovered ? accent : 'rgba(255,255,255,0.08)'}`,
@@ -178,7 +184,7 @@ function SkillCard({ name, level, accent, size, index, isInView, icon: Icon }: S
                     >
                         {/* Icon Container */}
                         <motion.div
-                            className="relative p-4 rounded-2xl transition-all duration-500"
+                            className="relative p-3 sm:p-4 rounded-2xl transition-all duration-500"
                             style={{
                                 backgroundColor: `color-mix(in oklch, ${accent} ${isHovered ? '20' : '12'}%, transparent)`,
                                 border: `1px solid ${isHovered ? `${accent}60` : 'rgba(255,255,255,0.08)'}`,
@@ -208,7 +214,7 @@ function SkillCard({ name, level, accent, size, index, isInView, icon: Icon }: S
 
                         {/* Floating Level Badge */}
                         <motion.div
-                            className="relative px-4 py-2 rounded-full font-black text-sm backdrop-blur-xl"
+                            className="relative px-3 py-1 sm:px-4 sm:py-2 rounded-full font-black text-xs sm:text-sm backdrop-blur-xl"
                             style={{
                                 backgroundColor: `color-mix(in oklch, ${accent} 25%, transparent)`,
                                 color: accent,
@@ -241,15 +247,14 @@ function SkillCard({ name, level, accent, size, index, isInView, icon: Icon }: S
 
                     {/* Footer: Name + Progress */}
                     <motion.div
-                        className="mt-auto space-y-3"
+                        className="mt-auto space-y-2 sm:space-y-3"
                         animate={isHovered ? { y: -2 } : { y: 0 }}
                         transition={{ duration: 0.3 }}
                     >
                         {/* Skill Name */}
                         <h3
-                            className="font-black text-foreground tracking-tight leading-none"
+                            className={`font-black text-foreground tracking-tight leading-none ${nameSizes[size]}`}
                             style={{
-                                fontSize: size === 'lg' ? '2rem' : size === 'md' ? '1.5rem' : '1.25rem',
                                 textShadow: isHovered ? `0 0 20px ${accent}40` : 'none'
                             }}
                         >
@@ -259,7 +264,7 @@ function SkillCard({ name, level, accent, size, index, isInView, icon: Icon }: S
                         {/* Enhanced Progress Bar */}
                         <div className="relative">
                             {/* Background Track */}
-                            <div className="h-2 bg-white/5 rounded-full overflow-hidden backdrop-blur-sm">
+                            <div className="h-1.5 sm:h-2 bg-white/5 rounded-full overflow-hidden backdrop-blur-sm">
                                 {/* Animated Fill */}
                                 <motion.div
                                     initial={{ width: 0 }}
@@ -377,16 +382,16 @@ export function SkillsSection() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                     transition={{ duration: 0.8 }}
-                    className="text-center mb-16"
+                    className="text-center mb-10 sm:mb-16"
                 >
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-[0.2em] bg-primary/10 text-primary border border-primary/20 mb-6 mx-auto">
-                        <Cpu className="w-4 h-4" />
+                    <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[0.6rem] sm:text-xs font-bold uppercase tracking-[0.2em] bg-primary/10 text-primary border border-primary/20 mb-4 sm:mb-6 mx-auto">
+                        <Cpu className="w-3 h-3 sm:w-4 sm:h-4" />
                         Technical Proficiency
                     </div>
-                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-black mb-8 tracking-tight">
+                    <h2 className="text-3xl sm:text-5xl md:text-6xl font-black mb-4 sm:mb-8 tracking-tight">
                         Powering <span className="gradient-text">Experiences.</span>
                     </h2>
-                    <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
                         A comprehensive toolkit of modern technologies I use to architect and build high-performance digital products.
                     </p>
                 </motion.div>
@@ -396,7 +401,7 @@ export function SkillsSection() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ delay: 0.2, duration: 0.6 }}
-                    className="flex flex-wrap justify-center gap-3 mb-16"
+                    className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10 sm:mb-16"
                 >
                     {categories.map((cat, idx) => (
                         <motion.button
@@ -411,7 +416,7 @@ export function SkillsSection() {
                                 transition: { duration: 0.2 }
                             }}
                             whileTap={{ scale: 0.95 }}
-                            className={`group relative px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 flex items-center gap-2 overflow-hidden ${activeFilter === cat.id
+                            className={`group relative px-4 py-2 sm:px-6 sm:py-3 rounded-full font-bold text-xs sm:text-sm transition-all duration-300 flex items-center gap-1.5 sm:gap-2 overflow-hidden ${activeFilter === cat.id
                                 ? 'bg-primary text-primary-foreground shadow-lg'
                                 : 'glass border border-white/10 text-muted-foreground hover:border-white/30 hover:text-foreground'
                                 }`}
@@ -430,7 +435,7 @@ export function SkillsSection() {
                                 whileHover={{ rotate: 360 }}
                                 transition={{ duration: 0.5 }}
                             >
-                                <cat.icon className="w-4 h-4" />
+                                <cat.icon className="w-3 h-3 sm:w-4 sm:h-4" />
                             </motion.div>
 
                             {cat.label}
@@ -449,7 +454,7 @@ export function SkillsSection() {
                 {/* Skills Bento Grid */}
                 <motion.div
                     layout
-                    className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 auto-rows-[200px]"
+                    className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 auto-rows-[160px] sm:auto-rows-[200px]"
                 >
                     {filteredSkills.map((skill, index) => (
                         <SkillCard
