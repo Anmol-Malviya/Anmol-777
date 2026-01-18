@@ -17,8 +17,13 @@ export function CustomCursor() {
     const cursorYSpring = useSpring(cursorY, springConfig);
 
     useEffect(() => {
-        setMounted(true);
+        const timer = setTimeout(() => {
+            setMounted(true);
+        }, 0);
+        return () => clearTimeout(timer);
+    }, []);
 
+    useEffect(() => {
         // Check if device supports hover (not mobile)
         const mediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
         const updateMobile = () => setIsMobile(!mediaQuery.matches);

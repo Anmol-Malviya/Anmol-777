@@ -80,13 +80,13 @@ export function ContactSection() {
                 >
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-[0.2em] bg-primary/10 text-primary border border-primary/20 mb-6">
                         <Send className="w-4 h-4" />
-                        Let's Connect
+                        Let&apos;s Connect
                     </div>
                     <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 tracking-tight">
                         Get In <span className="gradient-text">Touch</span>
                     </h2>
                     <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-                        I'm always open to new opportunities and collaborations. Feel free to reach out!
+                        I&apos;m always open to new opportunities and collaborations. Feel free to reach out!
                     </p>
                 </motion.div>
 
